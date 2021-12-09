@@ -13,13 +13,13 @@ const refs = {
     selectedTime: null,
 }
 
- flatpickr('#datetime-picker', {
+ new flatpickr('#datetime-picker', {
     enableTime: true,
     time_24hr: true,
-    defaultDate:  Date(),
+    defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-        if(selectedDates[0].getTime() <  Date().getTime()){
+        if(selectedDates[0].getTime() < new Date().getTime()){
             Notify.failure('Please choose a date in the future');
             refs.startBtn.setAttribute('disabled', true)
             return;
