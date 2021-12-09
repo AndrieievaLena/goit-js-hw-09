@@ -103,7 +103,7 @@ class Timer {
     
 }
 
-const timer = Timer({
+const timer = new Timer({
     onTick: updateClockfase,
 
 });
