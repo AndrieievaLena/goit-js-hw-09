@@ -2,18 +2,7 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
-const refs = {
-    timerDays: document.querySelector('span[data-days]'),
-    timerHours: document.querySelector('span[data-hours]'),
-    timerMinutes: document.querySelector('span[data-minutes]'),
-    timerSeconds: document.querySelector('span[data-seconds]'),
-    start: document.querySelector('button[data-start]'),
-    clocktablet: document.querySelector('#datetime-picker'),
-    selectedTime: null,
-}
-
- new flatpickr('#datetime-picker', {
+new flatpickr('#datetime-picker', {
     enableTime: true,
     time_24hr: true,
     defaultDate: new Date(),
@@ -29,7 +18,16 @@ const refs = {
     },
  }); 
 
- 
+ const refs = {
+    days: document.querySelector('span[data-days]'),
+    hours: document.querySelector('span[data-hours]'),
+    minutes: document.querySelector('span[data-minutes]'),
+    seconds: document.querySelector('span[data-seconds]'),
+    startBtn: document.querySelector('button[data-start]'),
+    clockface: document.querySelector('#datetime-picker'),
+    selectedTime: null,
+}
+
 class Timer {
     constructor({onTick}){
     this.intervalId = null;
@@ -56,7 +54,7 @@ class Timer {
         this.intervalId = setInterval(() =>{
            
 
-            const currentTime =  Date().getTime(); 
+            const currentTime = new Date().getTime(); 
             const deltaTime = startTime - currentTime;
 
             if(deltaTime <= 0) {
@@ -110,9 +108,9 @@ const timer = new Timer({
 
 refs.startBtn.addEventListener('click', timer.start.bind(timer));
 
-function updateClockfase({ timerDays, timerHours, timerMinutes, timerSeconds }) {
-    refs.timerDays.textContent = `${timerDays}`;
-    refs.timerHours.textContent = `${timerHours}`;
-    refs.timerMinutes.textContent = `${timerMinutes}`;
-    refs.timerSeconds.textContent = `${timerSeconds}`;
+function updateClockfase({ days, hours, minutes, seconds }) {
+    refs.days.textContent = `${days}`;
+    refs.hours.textContent = `${hours}`;
+    refs.minutes.textContent = `${minutes}`;
+    refs.seconds.textContent = `${seconds}`;
 }
